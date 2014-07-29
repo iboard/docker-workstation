@@ -1,4 +1,3 @@
-
 # README
 
 This is Andi's Docker Image for Ruby Development
@@ -14,7 +13,8 @@ ATTATION!!! Changes to the RVM setup are imutable too. You
 will loose them on every logout! Instead of changing the
 RVM-Environment while you're logged in at the running image
 make your changes in the Dockerfile of the host!
-
+The same is true for any setup in dot-files within the user's 
+home-path.
 
 now run: "rake -T <enter>"
 
