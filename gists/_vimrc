@@ -1,0 +1,172 @@
+set shell=/bin/sh
+set nocompatible
+set background=dark
+set guifont=Monaco:h18
+set guitablabel=%M%t
+set helplang=en
+set langmenu=none
+set backspace=indent,eol,start
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,default,latin1
+set iskeyword=@,48-57,_,192-255,-
+set termencoding=utf-8
+set guioptions=egmrL
+set autoindent
+set tabstop=2
+set hlsearch
+set expandtab
+set shiftwidth=2
+set foldmethod=indent
+set foldnestmax=10
+set nofoldenable
+set foldlevel=1
+setlocal spell spelllang=en_us
+set ignorecase
+set smartindent
+set showmatch
+set sessionoptions-=options
+
+" ---- Andi´s Settings ----------------------------------------
+set mouse=a
+set number
+set norelativenumber
+
+" ---- Color schemes ------------------------------------------
+nmap <leader>1 :colorscheme solarized<cr>
+nmap <leader>2 :colorscheme wombatAndi<cr>
+colorscheme wombatAndi
+
+" Set the language and locale
+language en_US.UTF-8
+set spelllang=en_us
+
+" remove dot as a word-character
+set iskeyword-=.
+"
+" ----  Andi´s macros
+"
+" ====  Helpers and overwrite default keys
+" change C-W to comma
+map , <c-w>
+map ,z :write<cr>
+map ,# :b#<cr>
+
+map <c-j>n :set relativenumber<cr>
+map <c-j>N :set number<cr>
+
+" jump to tag - because ] is hard to do on de-keyboards
+map ,, <c-]>
+"
+"
+" ----- RAKE
+"
+" Run current file with rake and open the html-output in Google Chrome
+map <c-j>r :w<cr>:!rspec -f h -o /tmp/rspec.html %; open -a "Google Chrome" /tmp/rspec.html<cr>
+"
+" Run current file with rspec in a dumb-term
+map <c-j>c :w<cr>:!rspec -f p %<cr>
+"
+" Run all specs in a dumb term
+map <c-j>C :w<cr>:!rspec -f p spec/**/*_spec.rb<cr>
+"
+" Run rake
+map <c-j>R :w<cr>:!rake<cr>
+"
+" open current file with Marked (for .md-files only)
+map <c-j>M :!open -a marked %<cr>
+"
+" Run current spec with zeus
+map <c-j>z :!zeus rspec %<cr>
+
+
+" --- INSERTS WHILE EDITING
+"
+" Insert current date and time followed by my E-mail-address
+inoremap <c-j>I <C-R>=strftime("%c") . ' <andreas@altendorfer.at>'<CR>
+" Date only
+inoremap <c-j>i <C-R>=strftime("%b %d, %Y")<CR>
+"
+" Underline with ----
+map <c-j>u yypV:s/./-/g<cr>/\\\\<cr><down>0
+map <c-j>U yypV:s/./=/g<cr>/\\\\<cr><down>0
+
+" Clear search-term
+map <c-j>S :noh<cr>
+
+" Disable <tab> in buffer to support snippets
+map <c-j>s :iunmap <buffer> <tab ><left><bs><c-e><cr>
+
+" Search in all source files for the current word
+map <c-j>g :execute "vimgrep /" . expand("<cword>") . "/j app/**/*rb app/**/*haml **/*md app/**/*css* app/**/*coffee" <Bar> cw<CR>
+
+" Add Source-files to args
+map <c-j>a :args app/** lib/** spec/** config/**<cr>:b#<cr>:ls<cr>
+
+" Autosave for macVim
+au FocusLost * :silent! wall                 " Save on FocusLost
+au FocusLost * call feedkeys("\<C-\>\<C-n>") " Return to normal mode on FocustLost
+
+abb sop save_and_open_page
+
+" -------------------------------------
+" --- Ruby Editing and Refactoring ----
+" -------------------------------------
+
+" - Convert do .. end into a one-liner with { }
+map <c-r>1 V2<down>JV:s/do/{/g<cr>:s/end/}/g<cr>:nohl<cr>
+
+" - Split a one-liner { } into 3 lines with do end
+map <c-r>2 V:s/{/do/g<cr>/\|<cr>na<cr><esc>$s<cr>end<esc>:nohl<cr>
+
+" - Remove trailing blanks before write
+autocmd BufWritePre * :%s/\s\+$//e
+
+
+" - Next in quickfix
+map <c-n> :cn<CR>
+map <c-p> :cp<CR>
+
+" Git and Gist Implementation
+let g:gist_clip_command = "pbcopy"
+map <c-j>gc :execute "Git commit -av"<cr>
+map <c-j>ga :execute "Git add ."<cr>
+map <c-j>gs :execute "Git status"<cr>
+map <c-j>gd :execute "Git diff --color"<cr>
+map <c-j>gb :execute "Git blame --color %"<cr>
+map <c-j>gl :execute "Git log --color"<cr>
+map <c-j>gp :execute "!git push"<cr>
+map <c-j>Y :execute "!rake deploy:app; rake deploy:docs"
+
+let mapleader=","
+" map <Leader>t :CommandT<cr>
+" map <Leader>T :CommandTFlush<cr>:CommandT<cr>
+set wildignore+=doc/*,coverage/*
+
+" Capistrano
+au BufNewFile,BufRead *.cap set filetype=ruby
+" au BufNewFile,BufRead *.exs set filetype=elixir | source ~/.janus/andi/bundle/vim-elixir/indent/elixir.vim |source ~/.janus/andi/bundle/vim-elixir/syntax/elixir.vim
+" au BufNewFile,BufRead *.ex set filetype=elixir | source ~/.janus/andi/bundle/vim-elixir/indent/elixir.vim |source ~/.janus/andi/bundle/vim-elixir/syntax/elixir.vim
+
+" Global Buffer Actions on load
+au BufNewFile,BufRead * set nospell
+
+" Quickfix Navigation
+map ,. :cnext<cr>
+map ,m :cprev<cr>
+map ,w :cw<cr>
+
+" automatically reload vimrc when it's saved
+au BufWritePost .vimrc so ~/.vimrc
+
+" Set the status line
+set statusline=%F%m%r%h%w\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+
+" reselect visual block after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+au InsertLeave * set nopaste
+
+" quick buffer nav
+nnoremap gb :buffers<CR>:b<Space>
+

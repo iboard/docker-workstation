@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "RUNNING DOCKER IMAGE andi/workstation"
+sudo docker run -p 22 -it -v `pwd`/project_source:/home/developer/projects andi/workstation /bin/su - developer -c /bin/bash
+echo "Goodbey"

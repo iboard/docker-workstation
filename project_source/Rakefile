@@ -1,0 +1,6 @@
+
+task :default => :test
+desc "Run all specs"
+task :test do
+  system %w(rspec spec/)
+end
