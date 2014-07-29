@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo docker build -rm=false -t andi/workstation .
+sudo docker build -rm=false -t iboard/developer-workstation .
