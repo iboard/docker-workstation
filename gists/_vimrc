@@ -32,9 +32,9 @@ set number
 set norelativenumber
 
 " ---- Color schemes ------------------------------------------
-nmap <leader>1 :colorscheme solarized<cr>
-nmap <leader>2 :colorscheme wombatAndi<cr>
-colorscheme wombatAndi
+" nmap <leader>1 :colorscheme solarized<cr>
+" nmap <leader>2 :colorscheme wombatAndi<cr>
+" colorscheme wombatAndi
 
 " Set the language and locale
 language en_US.UTF-8
