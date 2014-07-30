@@ -15,10 +15,14 @@ RUN apt-get -fy install htop git openssh-server vim ruby curl tmux links
 # INSTALL DEVELOPER ENVIRONMENT
 
 ## create the user and a shared project-directory
+### ADD USER
 RUN useradd -c "Developer" -m -d /home/developer -s /bin/bash developer
 RUN su - developer -c "mkdir ~/projects ~/src"
-ADD project_source/  ~/src
-#RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
+### PACK CURRENT SOURCE
+ADD project_source  ~/src/
+RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
+RUN su - developer -c "rm -Rf ~/src"
+### SETUP LINUX USER
 RUN su - developer -c "echo 'cat .motd' >> ~/.bashrc"
 RUN su - developer -c "echo 'cd projects' >> ~/.bashrc"
 RUN echo 'developer ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
@@ -45,5 +49,5 @@ RUN chown -R developer:developer /home/developer/.vim
 
 
 # BOOT
-CMD [ "sudo", "/etc/inti.d/ssh", "start" ]
+CMD [ "/etc/init.d/ssh", "start" ]
 CMD [ "su", "-", "developer", "-l", "tmux", "new" ]

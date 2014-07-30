@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo "RUNNING DOCKER IMAGE iboard/developer-workstation"
-sudo docker run -p 22 -it -v `pwd`/project_source:/home/developer/projects iboard/developer-workstation su - developer -c "tmux new -s DOCK -n DEVEL"
+sudo docker run -it -v `pwd`/project_source:/home/developer/projects iboard/developer-workstation su - developer -c "tmux new -s DOCK -n DEVEL"
 #sudo docker run -p 22 -it -v `pwd`/project_source:/home/developer/projects andi/workstation /bin/su - developer -c /bin/bash
 echo "Goodbey"
