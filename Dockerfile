@@ -10,9 +10,11 @@ RUN apt-get update
 
 
 # INSTALL PACKAGES
-RUN apt-get -fy install htop git openssh-server vim ruby curl tmux links
+RUN apt-get -fy install htop git openssh-server vim ruby curl tmux links unzip vim-rails
 
 # INSTALL DEVELOPER ENVIRONMENT
+RUN locale-gen en_US.UTF-8
+RUN dpkg-reconfigure locales
 
 ## create the user and a shared project-directory
 ### ADD USER
@@ -39,8 +41,12 @@ RUN su - developer -c "source ~/.rvm/scripts/rvm && rvm use 2.1.2 --default && c
 
 ## install console environment
 # ADD gists/_tmux.conf       /home/developer/.tmux.conf
-RUN su - developer -c "mkdir -p ~/.vim/bundle ~/.vim/colors"
+RUN su - developer -c "mkdir -p ~/.vim/bundle/nerdtree ~/.vim/colors"
 ADD gists/_motd            /home/developer/.motd
+### VIM
+ADD vim/nerdtree.zip       /home/developer/.vim/bundle/nerdtree/nerdtree.zip
+RUN su - developer -c "unzip -d /home/developer/.vim/bundle/nerdtree /home/developer/.vim/bundle/nerdtree/nerdtree.zip"
+RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/NERD_tree.vim' >> .vimrc"
 ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
@@ -50,4 +56,4 @@ RUN chown -R developer:developer /home/developer/.vim
 
 # BOOT
 CMD [ "/etc/init.d/ssh", "start" ]
-CMD [ "su", "-", "developer", "-l", "tmux", "new" ]
+CMD [ "su", "-", "developer", "-l", "tmux", "-8", "new" ]
