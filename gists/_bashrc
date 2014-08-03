@@ -1,0 +1,5 @@
+# DOCKER FILE _BASHRC
+export TERM="xterm"
+export LANG="en_US.utf-8"
+export EDITOR="vim"
+# /DOCKER FILE _BASHRC

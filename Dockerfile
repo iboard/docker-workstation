@@ -25,8 +25,10 @@ ADD project_source  ~/src/
 RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
 RUN su - developer -c "rm -Rf ~/src"
 ### SETUP LINUX USER
-RUN su - developer -c "echo 'cat .motd' >> ~/.bashrc"
-RUN su - developer -c "echo 'cd projects' >> ~/.bashrc"
+ADD gists/_bashrc /home/developer/.bashrc_ext
+RUN su - developer -c "echo 'source ~/.bashrc_ext' >> /home/developer/.bashrc"
+RUN su - developer -c "echo 'cat .motd' >> /home/developer/.bashrc"
+RUN su - developer -c "echo 'cd projects' >> /home/developer/.bashrc"
 RUN echo 'developer ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ADD README.md /home/developer/README.md
@@ -51,7 +53,6 @@ RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/
 ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
-ADD gists/wombatAndi.vim   /home/developer/.vim/colors/wombatAndi.vim
 RUN chown -R developer:developer /home/developer/.vim
 
 
