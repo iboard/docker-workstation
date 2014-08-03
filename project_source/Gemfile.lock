@@ -1,0 +1,35 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.2.5)
+    ffi (1.9.3)
+    given_core (3.5.4)
+      sorcerer (>= 0.3.7)
+    interactive_editor (0.0.10)
+      spoon (>= 0.0.1)
+    rspec (3.0.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+    rspec-core (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-given (3.5.4)
+      given_core (= 3.5.4)
+      rspec (>= 2.12)
+    rspec-mocks (3.0.3)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.3)
+    sorcerer (1.0.2)
+    spoon (0.0.4)
+      ffi
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  interactive_editor
+  rspec
+  rspec-given
