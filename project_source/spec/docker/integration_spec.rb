@@ -1,13 +1,15 @@
+
 require "spec_helper"
 
+describe 'DOCKER INTEGRATION' do
 
-describe 'Docker Image Verification' do
+  Given(:user_home)          { '/home/developer' }
+  Given(:project_prefix)     { 'projects' }
+  Given(:expected_root_path) { File.join(user_home, project_prefix) }
 
-  Given(:project_path) { `ls -1d ~/projects`.strip }
-
-  context 'shared project sources' do
-    When(:expected_path) { "/home/developer/projects" }
-    Then { project_path == expected_path }
+  context "Project's root exists" do
+    When(:local_root_path) { `ls -1d ~/projects`.strip }
+    Then { local_root_path.eql?(expected_root_path) }
   end
 
 end
