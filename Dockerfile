@@ -21,7 +21,7 @@ RUN dpkg-reconfigure locales
 RUN useradd -c "Developer" -m -d /home/developer -s /bin/bash developer
 RUN su - developer -c "mkdir ~/projects ~/src"
 ### PACK CURRENT SOURCE
-ADD project_source  ~/src/
+ADD project_source  /src/
 RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
 RUN su - developer -c "rm -Rf ~/src"
 ### SETUP LINUX USER
@@ -32,7 +32,7 @@ RUN su - developer -c "echo 'cd projects' >> /home/developer/.bashrc"
 RUN echo 'developer ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ADD README.md /home/developer/README.md
-ADD Gemfile   /home/developer/projects/Gemfile
+ADD project_source/Gemfile   /home/developer/projects/Gemfile
 
 ## install rvm
 RUN su - developer -c "/usr/bin/curl -sSL https://get.rvm.io | /bin/bash -s stable"
@@ -47,7 +47,7 @@ RUN su - developer -c "mkdir -p ~/.vim/bundle/nerdtree ~/.vim/colors"
 ADD gists/_motd            /home/developer/.motd
 ### VIM
 ADD vim/nerdtree.zip       /home/developer/.vim/bundle/nerdtree/nerdtree.zip
-ADD vim/vim-colorschemes/colors /home/developer/.vim/colors
+ADD vim/vim-colorschemes/colors/ /home/developer/.vim/colors/
 RUN su - developer -c "unzip -d /home/developer/.vim/bundle/nerdtree /home/developer/.vim/bundle/nerdtree/nerdtree.zip"
 RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/NERD_tree.vim' >> .vimrc"
 ADD gists/_vimrc           /home/developer/.vimrc
