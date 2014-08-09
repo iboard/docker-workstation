@@ -47,6 +47,7 @@ RUN su - developer -c "mkdir -p ~/.vim/bundle/nerdtree ~/.vim/colors"
 ADD gists/_motd            /home/developer/.motd
 ### VIM
 ADD vim/nerdtree.zip       /home/developer/.vim/bundle/nerdtree/nerdtree.zip
+ADD vim/command-t.vba      /home/developer/.vim/bundle/command-t.vba
 ADD vim/vim-colorschemes/colors/ /home/developer/.vim/colors/
 RUN su - developer -c "unzip -d /home/developer/.vim/bundle/nerdtree /home/developer/.vim/bundle/nerdtree/nerdtree.zip"
 RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/NERD_tree.vim' >> .vimrc"
@@ -54,6 +55,7 @@ ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
 RUN chown -R developer:developer /home/developer/.vim
+RUN su - developer -c "vim -e \"source %\" command-t.vba"
 
 
 # BOOT
