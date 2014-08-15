@@ -171,3 +171,6 @@ au InsertLeave * set nopaste
 nnoremap gb :buffers<CR>:b<Space>
 
 source $HOME/.vim/bundle/nerdtree/plugin/NERD_tree.vim
+set smartindent
+set autoindent
+filetype indent on
