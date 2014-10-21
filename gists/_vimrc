@@ -170,4 +170,8 @@ au InsertLeave * set nopaste
 " quick buffer nav
 nnoremap gb :buffers<CR>:b<Space>
 
+if $TERM == "xterm-256color"
+  set t_Co=256
+endif
+
 source $HOME/.vim/bundle/nerdtree/plugin/NERD_tree.vim

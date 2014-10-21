@@ -48,12 +48,16 @@ ADD gists/_motd            /home/developer/.motd
 ### VIM
 ADD vim/nerdtree.zip       /home/developer/.vim/bundle/nerdtree/nerdtree.zip
 ADD vim/vim-colorschemes/colors /home/developer/.vim/colors
+RUN find /home/developer/.vim/colors -name "*.vim" -exec mv {} /home/developer/.vim/colors/ \;
 RUN su - developer -c "unzip -d /home/developer/.vim/bundle/nerdtree /home/developer/.vim/bundle/nerdtree/nerdtree.zip"
 RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/NERD_tree.vim' >> .vimrc"
 ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
 RUN chown -R developer:developer /home/developer/.vim
+
+RUN mkdir -p /home/developer/dev
+RUN chown -R developer:developer /home/developer/dev
 
 
 # BOOT
