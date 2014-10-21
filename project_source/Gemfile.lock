@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+<<<<<<< HEAD
     RedCloth (4.2.9)
     actionpack (4.1.4)
       actionview (= 4.1.4)
@@ -50,6 +51,14 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
     ref (1.0.5)
+=======
+    diff-lcs (1.2.5)
+    ffi (1.9.3)
+    given_core (3.5.4)
+      sorcerer (>= 0.3.7)
+    interactive_editor (0.0.10)
+      spoon (>= 0.0.1)
+>>>>>>> c3871eccab2a9963478fbc0cbaaaeda718fbbfe2
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -64,6 +73,7 @@ GEM
       rspec (>= 2.12)
     rspec-mocks (3.0.3)
       rspec-support (~> 3.0.0)
+<<<<<<< HEAD
     rspec-rails (3.0.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -88,11 +98,18 @@ GEM
     thread_safe (0.3.4)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+=======
+    rspec-support (3.0.3)
+    sorcerer (1.0.2)
+    spoon (0.0.4)
+      ffi
+>>>>>>> c3871eccab2a9963478fbc0cbaaaeda718fbbfe2
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< HEAD
   RedCloth
   awesome_print
   dotenv-deployment
@@ -105,3 +122,8 @@ DEPENDENCIES
   spring
   therubyracer
   therubyrhino
+=======
+  interactive_editor
+  rspec
+  rspec-given
+>>>>>>> c3871eccab2a9963478fbc0cbaaaeda718fbbfe2

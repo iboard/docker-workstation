@@ -21,7 +21,7 @@ RUN dpkg-reconfigure locales
 RUN useradd -c "Developer" -m -d /home/developer -s /bin/bash developer
 RUN su - developer -c "mkdir ~/projects ~/src"
 ### PACK CURRENT SOURCE
-ADD project_source  ~/src/
+ADD project_source  /src/
 RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
 RUN su - developer -c "rm -Rf ~/src"
 ### SETUP LINUX USER
@@ -32,7 +32,7 @@ RUN su - developer -c "echo 'cd projects' >> /home/developer/.bashrc"
 RUN echo 'developer ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ADD README.md /home/developer/README.md
-ADD Gemfile   /home/developer/projects/Gemfile
+ADD project_source/Gemfile   /home/developer/projects/Gemfile
 
 ## install rvm
 RUN su - developer -c "/usr/bin/curl -sSL https://get.rvm.io | /bin/bash -s stable"
@@ -49,12 +49,14 @@ ADD gists/_motd            /home/developer/.motd
 ADD vim/nerdtree.zip       /home/developer/.vim/bundle/nerdtree/nerdtree.zip
 ADD vim/vim-colorschemes/colors /home/developer/.vim/colors
 RUN find /home/developer/.vim/colors -name "*.vim" -exec mv {} /home/developer/.vim/colors/ \;
+ADD vim/command-t.vba      /home/developer/.vim/bundle/command-t.vba
 RUN su - developer -c "unzip -d /home/developer/.vim/bundle/nerdtree /home/developer/.vim/bundle/nerdtree/nerdtree.zip"
 RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/NERD_tree.vim' >> .vimrc"
 ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
 RUN chown -R developer:developer /home/developer/.vim
+RUN su - developer -c "vim -e \"source %\" command-t.vba"
 
 RUN mkdir -p /home/developer/dev
 RUN chown -R developer:developer /home/developer/dev

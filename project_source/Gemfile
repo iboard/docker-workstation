@@ -1,29 +1,10 @@
 source 'https://rubygems.org'
 
-gem 'RedCloth'
-
-platform :jruby do
-  gem 'therubyrhino'
-end
-
-platform :ruby do
-  gem 'therubyracer'
-end
-
-#
-# test
-#
-group :development, :test do
-  gem 'spring'
+group :test, :development do
+  gem 'simplecov', :require => false, :group => :test
+  #gem 'awesome_print'
+  gem 'prettyprint'
   gem 'rspec'
-  gem 'rspec-rails'
   gem 'rspec-given'
-  gem 'pry'
-  gem 'simplecov', require: false
+  gem 'interactive_editor'
 end
-
-# helpers
-gem 'awesome_print'
-gem 'dotenv-rails'
-gem 'dotenv-deployment'
-
