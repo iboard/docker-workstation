@@ -182,3 +182,6 @@ filetype indent on
 " set path for the find cmd
 set path=**/*
 
+
+execute pathogen#infect()
+
