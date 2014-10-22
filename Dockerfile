@@ -19,7 +19,7 @@ RUN dpkg-reconfigure locales
 ## create the user and a shared project-directory
 ### ADD USER
 RUN useradd -c "Developer" -m -d /home/developer -s /bin/bash developer
-RUN su - developer -c "mkdir ~/projects ~/src"
+RUN su - developer -c "mkdir -p ~/projects ~/src ~/host"
 ### PACK CURRENT SOURCE
 ADD project_source  /src/
 RUN su - developer -c "tar cvzf ~/original_project_source.tgz ~/src"
