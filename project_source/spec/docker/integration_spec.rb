@@ -6,8 +6,7 @@ describe 'DOCKER INTEGRATION' do
   Given(:project_prefix)     { 'projects' }
   Given(:expected_root_path) { File.join(user_home, project_prefix) }
 
-  context "Project's root exists" do
-    When(:local_root_path) { `ls -1d ~/projects`.strip }
-    Then { local_root_path.eql?(expected_root_path) }
-  end
+  When(:local_root_path) { `ls -1d ~/projects`.strip }
+  Then { local_root_path.eql?(expected_root_path) }
+
 end
