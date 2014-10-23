@@ -59,15 +59,17 @@ RUN su - developer -c "echo 'source /home/developer/.vim/bundle/nerdtree/plugin/
 ADD gists/_vimrc           /home/developer/.vimrc
 ADD gists/rspec-vim.vim    /home/developer/.vim/bundle/rspec-vim.vim
 ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
-
 RUN chown -R developer:developer /home/developer/.vim
 RUN su - developer -c "cd /home/developer/.vim/bundle && git clone https://github.com/wincent/Command-T.git"
+RUN su - developer -c "source /home/developer/.rvm/scripts/rvm && rvm use system && cd /home/developer/.vim/bundle/Command-T && sudo gem install rake && rake make && cd -"
 
 ## MKDIR for shared host-path
 RUN mkdir -p /home/developer/dev
+
+
+## Finalize and clean up
 RUN chown -R developer:developer /home/developer
 
-RUN su - developer -c "source /home/developer/.rvm/scripts/rvm && rvm use system && cd /home/developer/.vim/bundle/Command-T && sudo gem install rake && rake make && cd -"
 
 # BOOT
 CMD [ "/etc/init.d/ssh", "start" ]
