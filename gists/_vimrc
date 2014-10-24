@@ -34,6 +34,7 @@ set norelativenumber
 " ---- Color schemes ------------------------------------------
 nmap <leader>1 :colorscheme campfire<cr>
 nmap <leader>2 :colorscheme wombatAndi<cr>
+nmap <leader>2 :colorscheme railscasts<cr>
 colorscheme campfire
 
 " Set the language and locale
