@@ -44,8 +44,8 @@ RUN su - developer -c "echo 'source ~/.rvm/scripts/rvm && rvm use 2.1.2 ' >> ~/.
 RUN su - developer -c "source ~/.rvm/scripts/rvm && rvm use 2.1.2 && cd projects && bundle"
 
 ## install console environment
-# ADD gists/_tmux.conf       /home/developer/.tmux.conf
 ADD gists/_motd            /home/developer/.motd
+#RUN dpkg-reconfigure locales && locale-gen C.UTF-8 && /usr/sbin/update-locale LANG=C.UTF-8
 
 
 ### VIM
@@ -76,6 +76,12 @@ ADD gists/run_ruby.vim     /home/developer/.vim/bundle/run_ruby.vim
 RUN chown -R developer:developer /home/developer/.vim
 RUN su - developer -c "cd /home/developer/.vim/bundle && git clone https://github.com/wincent/Command-T.git"
 RUN su - developer -c "source /home/developer/.rvm/scripts/rvm && rvm use system && cd /home/developer/.vim/bundle/Command-T && sudo gem install rake && rake make && cd -"
+
+# Install TMUX-powerline
+ADD gists/_tmux.conf       /home/developer/.tmux.conf
+RUN mkdir -p /home/developer/.tmux/tmux-powerline && chown -R developer:developer /home/developer/.tmux
+ADD tmux/tmux-powerline /home/developer/.tmux/tmux-powerline/
+RUN chown -R developer:developer /home/developer/.tmux
 
 ## Finalize and clean up
 RUN chown -R developer:developer /home/developer

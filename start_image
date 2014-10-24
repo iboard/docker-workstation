@@ -1,7 +1,9 @@
 #!/bin/bash
 
-D_MAP = ""
-
 echo "RUNNING DOCKER IMAGE iboard/developer-workstation"
-docker run -it -v `pwd`/project_source:/home/developer/projects -v $HOME/dev:/home/developer/dev -v $HOME:/home/developer/host iboard/developer-workstation su - developer -c "tmux new -s DOCK -n DEVEL"
+docker run -it -v `pwd`/project_source:/home/developer/projects \
+  -v $HOME/dev:/home/developer/dev \
+  -v $HOME:/home/developer/host \
+  iboard/developer-workstation \
+  su - developer -c "tmux -2u new -s DOCK -n DEVEL"
 echo "Goodbey"
