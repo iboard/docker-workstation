@@ -79,7 +79,9 @@ RUN su - developer -c "source /home/developer/.rvm/scripts/rvm && rvm use system
 
 # Install TMUX-powerline
 ADD gists/_tmux.conf       /home/developer/.tmux.conf
+ADD gists/_tmux_powerline.conf       /home/developer/.tmux-powerlinerc
 RUN mkdir -p /home/developer/.tmux/tmux-powerline && chown -R developer:developer /home/developer/.tmux
+RUN ln -s /bin/grep /bin/ggrep
 ADD tmux/tmux-powerline /home/developer/.tmux/tmux-powerline/
 RUN chown -R developer:developer /home/developer/.tmux
 
