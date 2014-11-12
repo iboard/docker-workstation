@@ -38,6 +38,7 @@ RUN su - developer -c "echo 'cd projects' >> /home/developer/.bashrc"
 RUN echo 'developer ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ### install rvm
+RUN su - developer -c "curl -sSL https://rvm.io/mpapis.asc | gpg --import -"
 RUN su - developer -c "/usr/bin/curl -sSL https://get.rvm.io | /bin/bash -s stable"
 RUN su - developer -c "command rvm install 2.1.2"
 RUN su - developer -c "echo 'source ~/.rvm/scripts/rvm && rvm use 2.1.2 ' >> ~/.bashrc"
