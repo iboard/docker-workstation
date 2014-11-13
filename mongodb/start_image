@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "RUNNING DOCKER IMAGE backend/mongo"
+docker run backend/mongo
+
+echo "Goodbye MongoDB"

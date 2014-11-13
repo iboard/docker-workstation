@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "RUNNING DOCKER IMAGE backend/redis"
+docker run backend/redis
+
+echo "Goodbye redis"

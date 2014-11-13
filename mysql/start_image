@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "RUNNING DOCKER IMAGE backend/mysql"
+docker run backend/mysql
+
+echo "Goodbye MySQL"
